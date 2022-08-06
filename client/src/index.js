@@ -1,14 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql, createHttpLink } from '@apollo/client';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// client.query({
+//     query: gql`
+//       query GetLocations {
+//         locations {
+//           id
+//           name
+//           description
+//           photo
+//         }
+//       }
+//     `,
+//   }).then((result) => console.log(result));
+
+const client = new ApolloClient({
+  link:"http://localhost:5000",  //uri specifies the URL of our GraphQL server.
+  cache: new InMemoryCache()
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <ApolloProvider client={client}>
     <App />
-  </React.StrictMode>
+  </ApolloProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
