@@ -10,7 +10,7 @@ const { validateLoginInput } = require("../../util/validators");
 
 function generateToken(user){
     return jwt.sign({
-        id : user.id,
+        id: user.id,
         email: user.email,
         username: user.username
     },
@@ -51,7 +51,7 @@ module.exports = {
             // Validate user data, validate username doesnt exist, hash the password, create auth token
             const { valid, errors }  = validateRegisterInput(username, email, password, confirmPassword);
             if(!valid){
-                throw new UserInputError(Errors, { errors });
+                throw new UserInputError("Errors", { errors });
             }
             const user = await User.findOne({ username });
             if(user){
@@ -66,10 +66,10 @@ module.exports = {
                 email,
                 username,
                 password,
-                createdAt : new Date().toISOString
+                createdAt: new Date().toISOString()
             });
             const res = await newUser.save();
-            const token = generateToken(user)
+            const token = generateToken(res)
             return {
                 ...res._doc,
                 id:res._id,

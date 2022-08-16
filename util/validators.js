@@ -21,7 +21,6 @@ module.exports.validateRegisterInput = (
     } else if(password !== confirmPassword){
         errors.password = "Passwords must match";
     }
-
     return {
         errors,
         valid: Object.keys(errors).length < 1

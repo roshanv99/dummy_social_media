@@ -4,24 +4,27 @@ import { Container } from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
-
+import { AuthProvider } from './context/auth'
 import MenuBar from "./components/MenuBar";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import AuthRoute from "./util/AuthRoute";
 
 function App() {
   return (
-    <Router>
-      <Container>
-        <MenuBar />
-        <Routes>
-          <Route exact path = '/' element={ <Home /> } />
-          <Route exact path = 'login' element={ <Login /> } />
-          <Route exact path = 'register' element={<Register /> } />
-        </Routes>
-      </Container>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Container>
+          <MenuBar />
+          <Routes>
+            <Route exact path = '/' element={ <Home /> } />
+            <Route exact path = 'login' element={ <AuthRoute><Login /></AuthRoute> } />
+            <Route exact path = 'register' element={<AuthRoute><Register /></AuthRoute>} />
+          </Routes>
+        </Container>
+      </Router>
+    </AuthProvider>
   );
 }
 
