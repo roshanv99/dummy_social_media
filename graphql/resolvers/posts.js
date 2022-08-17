@@ -45,9 +45,9 @@ module.exports = {
             });
 
             const post = await newPost.save();
-            context.pubsub.publish('NEW POST', {
-                newPost: post
-            });
+            // context.pubsub.publish('NEW POST', {
+            //     newPost: post
+            // });
             return post;
         },
 

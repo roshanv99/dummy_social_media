@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import App from './App';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, createHttpLink } from '@apollo/client';
-
+import { setContext } from 'apollo-link-context'
 
 // client.query({
 //     query: gql`
@@ -22,10 +22,21 @@ const httpLink = createHttpLink({
   uri: 'http://localhost:5000'
 });
 
+const authLink = setContext(() => {
+  const token = localStorage.getItem('jwtToken');
+  return ({
+    headers : {
+      Authorization : token ?  `Bearer ${token}` : ''
+    }
+  });
+});
+
 const client = new ApolloClient({
-  link: httpLink,  //uri specifies the URL of our GraphQL server.
+  link: authLink.concat(httpLink),  //uri specifies the URL of our GraphQL server.
   cache: new InMemoryCache()
 });
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
