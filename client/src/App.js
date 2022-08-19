@@ -22,7 +22,7 @@ function App() {
             <Route exact path = '/' element={ <Home /> } />
             <Route exact path = 'login' element={ <AuthRoute><Login /></AuthRoute> } />
             <Route exact path = 'register' element={<AuthRoute><Register /></AuthRoute>} />
-            {/* <Route exact path = '/posts/:postId' element={ <SinglePost /> } /> */}
+            <Route exact path = '/posts/:postId' element={ <SinglePost /> } />
           </Routes>
         </Container>
       </Router>

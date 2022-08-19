@@ -40,7 +40,7 @@ const Postcard = ({post : { body, createdAt, id, username, likes, comments }}) =
                     {comments.length}
                 </Label>
             </Button>
-            {user && user.username === username && <DeleteButton postId={id}/> }
+                {user && user.username === username && <DeleteButton postId={id}/> }
             </Card.Content>
         </Card>
  )
